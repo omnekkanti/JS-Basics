@@ -11,7 +11,11 @@
             confirm("do you want to leave the page to one.html")
         }
         function displayConfirmMessage2() {
-            return confirm("do you want to leave the page to one.html")//this works becoz 
+            return confirm("do you want to leave the page to one.html")//this works becoz we are returning the value it gives. smiliar to this onclick needs reutrn on displayConfirmMessage2() to chain value returned so that onclick can return wehn called by browser
+        // in nested functions return is important to pass the value to the parent function so that it can give boolean output. here return before confirm in displayConfirmMessage2() body , gives the boolean output from confirm() to the callee of displayConfirmMessage2() now callee here is onclick function it has to use return to forward the value from displayConfirmMessage2() to browser.
+        }
+        function proof(x){
+            return (x? true: false);
         }
     </script>
 </head>
@@ -20,19 +24,24 @@
     <a href="one.html" onclick="displayPopupMessage();"> Go to One Page with alert</a></br>
     <a href="one.html" onclick="return displayConfirmMessage()"> Go to One Page with confirmPopupMessage</a></br>
     <!-- it is adding whatever we write inside " " to the body of function onclick. so if nested fucntion displayConfirmMessage() returns something, it gets forwarded -->
-    <!-- return true in global scope is a mistake as it should be inside a function. gloabl scope has accces to props and methods of window object as window object is declared in that scope -->
+    <!-- return true in global scope is a mistake as it should be inside a function. global scope has accces to props and methods of window object as window object is declared in that scope -->
     <a href="one.html" onclick="return displayConfirmMessage2()"> Go to One Page with confirmPopupMessage2</a></br>
+    <a href="one.html" onclick="displayConfirmMessage2()"> Go to One Page with confirmPopupMessage2 with out return infornt of the function that chains the return value</a></br>
     <a href="one.html" onclick="return false"> click returns false</a></br>
     <a href="one.html" onclick="return true"> click returns true</a></br>
+    <a href="one.html" onclick="proof(true)"> click runs onclick with proof(true) as body</a></br>
+    <a href="one.html" onclick="return proof(true)"> click runs onclick with return proof(true) as body</a></br>
+    <a href="one.html" onclick="proof(false)"> click runs onclick with proof(false) as body</a></br>
+    <a href="one.html" onclick="return proof(false)"> click runs onclick with return proof(false) as body</a></br>
 
     <button onclick="displayConfirmMessage()">Click here for confirm</button>
     <button onclick="false;">Click here to submit boolean-false</button>
     
-    <!-- button tag behavior can be controlled based function return. as the button is to simply display itself, doesnt matter much-->
+    <!-- button tag behavior can be controlled based on function return. as the button is to simply display itself, doesnt matter much-->
 </body>
 
 </html>
 
 <!-- browser has multiple threads(v8, webapis like settimeout) and v8 thread uses stack datastructure to run functions which are nested starting with main function and heap to store objects
-    when the web apis threads are done runing they return the result wrapped in anonymous function and it gets pused into queue data structure. essentially webapis use queue. event loop another thread like render pushes anonymous function form callback queue to stack for execution when stack is empty. render thread uses render queue to render the result when the stack is empty.
+    when the web apis threads are done runing they return the result wrapped in anonymous function and it gets pused into queue data structure. essentially webapis use queue. event loop another thread like render pushes anonymous function from callback queue to stack for execution when stack is empty. render thread uses render queue to render the result when the stack is empty.
  -->
