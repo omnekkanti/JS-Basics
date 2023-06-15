@@ -13,6 +13,11 @@ git branch -D list
 git fetch
 git push
 
+tree - collection of files
+HEAD- is the pointer to the current branch reference, which is in turn a pointer to the last commit made on that branch.
+Index/staging area -  is proposed next commit [snapshot] . this is what git looks at when you rub git commit
+
+
 fatal: The current branch main has no upstream branch.
 To push the current branch and set the remote as upstream, use
 
